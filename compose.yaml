@@ -1,0 +1,34 @@
+services:
+  db:
+    container_name: symfonia_database
+    env_file: .env
+    image: postgres:17
+    volumes:
+      - "postgres:/var/lib/postgresql/data"
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}" ]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  symfonia:
+    container_name: symfonia
+    env_file: .env
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 3001:3001
+      - 3002:3002
+      - 3003:3003/tcp
+      - 3003:3003/udp
+    volumes:
+      - type: bind
+        source: ./symfonia.toml
+        target: /app/symfonia.toml
+
+volumes:
+  postgres:

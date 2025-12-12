@@ -1,0 +1,21 @@
+name: docker compose smoketest
+
+on:
+  schedule:
+    - cron: "0 12 1,10,20 * *"
+  workflow_dispatch:
+jobs:
+  deploy_compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Create .env file
+        run: cp compose-example.env .env
+      - name: Docker Compose Action
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: "compose.yaml"
+          up-flags: "--build"
+          down-flags: "-v"
