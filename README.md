@@ -135,5 +135,6 @@ This project is licensed under the AGPL-3.0 License - see the [LICENSE.md](LICEN
 
 This project is under active development. Features and APIs may change.
 
-[build-shield]: https://img.shields.io/github/actions/workflow/status/Alkamal01/chat-server/rust.yml?style=flat
-[build-url]: https://github.com/Alkamal01/chat-server/blob/main/.github/workflows/rust.yml
+[build-shield]: https://img.shields.io/github/actions/workflow/status/Alkamal01/chat-server/build_and_test.yml?style=flat
+[build-url]: https://github.com/Alkamal01/chat-server/blob/main/.github/workflows/build_and_test.yml
+
